@@ -252,7 +252,7 @@ void addStudent() {
 	}
 	if(check != 1){
 		addName:
-		printf("\tnhap ten: ");
+		printf("\tnhap ten hoc sinh: ");
 		fgets(students[add].name, sizeof(students[add].name), stdin);
 		students[add].name[strcspn(students[add].name,"\n")] = '\0';
 		for(i=0;i<strlen(students[add].name);i++){		
@@ -270,7 +270,7 @@ void addStudent() {
 			goto addName;	
 		}
 		addMail:
-		printf("\tnhap email: ");
+		printf("\tnhap email hoc sinh : ");
 		fgets(students[add].email, sizeof(students[add].email), stdin);
 		students[add].email[strcspn(students[add].email,"\n")] = '\0';
 		int same = 0;
@@ -297,7 +297,7 @@ void addStudent() {
 			goto addMail;
 		}
 		addPhone:
-		printf("\tEnter the Phone: ");
+		printf("\tEnter the Phone hoc sinh: ");
 		same = 0;
 		fgets(students[add].phone, sizeof(students[add].phone), stdin);
 		students[add].phone[strcspn(students[add].phone,"\n")] = '\0';
@@ -307,7 +307,7 @@ void addStudent() {
 			}
 		}
 		if(same == 1){
-			printf("\tError: This Phone is already exists.\n");
+			printf("\tError: Phone da ton tai.\n");
 			goto addPhone;
 		}
 		for(i=0;i<strlen(students[add].phone);i++){		
@@ -351,7 +351,7 @@ void addTeacher() {
     }
     if (check != 1) {
     addName:
-        printf("\tnhap ten: ");
+        printf("\tnhap ten giao vien : ");
         fgets(teachers[add].name, sizeof(teachers[add].name), stdin);
         teachers[add].name[strcspn(teachers[add].name, "\n")] = '\0';
         for (i = 0; i < strlen(teachers[add].name); i++) {        
@@ -369,7 +369,7 @@ void addTeacher() {
             goto addName;    
         }
     	addMail:
-        printf("\tNhap email: ");
+        printf("\tNhap email giao vien : ");
         fgets(teachers[add].email, sizeof(teachers[add].email), stdin);
         teachers[add].email[strcspn(teachers[add].email, "\n")] = '\0';
         int same = 0;
@@ -425,78 +425,224 @@ void addTeacher() {
         (numbers)++;
         printf("\tTeacher duoc them thanh cong!!\n");
     } else {
-        printf("\tError: ID da ton tais.\n");
+        printf("\tError: ID da ton tai.\n");
         goto addTeacher;
     }
 }
 
 void editStudent() {
 	system("cls");
-	printf("\n          --- Update Student Information ---\n");
-    int id;
-    int i;
-    printf("moi nhap id hoc sinh muon sua : ");
-    scanf("%d", &id);
-    getchar();
-
-    for ( i = 0; i < number; i++) {
-        if (students[i].id == id) {
-            printf("sua sinh vien : %s\n", students[i].name);
-            Student updated_student = students[i];
-            printf("nhap ten moi(de trong de giu nguyen): ");
-            fgets(updated_student.name, 50, stdin);
-            updated_student.name[strcspn(updated_student.name, "\n")] = 0;
-            printf("nhap email moi: ");
-            fgets(updated_student.email, 50, stdin);
-            updated_student.email[strcspn(updated_student.email, "\n")] = 0;
-            printf("nhap so dien thoai moi: ");
-            fgets(updated_student.phone, 50, stdin);
-            updated_student.phone[strcspn(updated_student.phone, "\n")] = 0;
-
-            if (validateInput(updated_student, 1)) {
-                students[i] = updated_student;
-                printf("hoc sinh cap nhap thanh cong !\n");
-            }
-            return;
-        }
-    }
-
-    printf("Error: khong tim thay id sinh vien.\n");
+	char afterGmail[] = "@gmail.com";
+	int i, edit; 
+	char choice[1];
+	Student:
+	printf("\t\t---Edit student---\n");
+	int Id;
+	printf("\tNhap id hoc sinh muon sua : ");
+	scanf("%d", &Id);
+	int check = 0;
+	fflush(stdin);
+	printf("\tThong tin sinh vien muon sua\n");
+	printf("\t----------------------\n");
+	for(i = 0; i < number; i++){
+	    if(Id == students[i].id){
+	        check = 1;
+	        edit = i;
+	        printf("\tID: %d\n", students[i].id);
+	        printf("\tName: %s\n", students[i].name);
+	        printf("\tEmail: %s\n", students[i].email);
+	        printf("\tPhone: %s\n", students[i].phone);
+	    }
+	}
+	if(check == 1){
+	    printf("\t\t---Update The New Student---\n");
+	    char temp[100];
+	    Name:
+	    printf("\tNhap name hoc sinh moi : ");
+	    strcpy(temp, students[edit].name);
+	    fgets(students[edit].name, sizeof(students[edit].name), stdin);
+	    students[edit].name[strcspn(students[edit].name,"\n")] = '\0';
+	    for(i = 0; i < strlen(students[edit].name); i++){
+	        if(students[edit].name[i] == 32 && students[edit].name[i+1] == 32){
+	            printf("\tError: Ten nay khong hop le.\n");
+	            goto Name;    
+	        }
+	        if((students[edit].name[i] < 65 || students[edit].name[i] > 122) && students[edit].name[i] != 32){
+	            printf("\tError: Ten nay khong hop le.\n");
+	            goto Name;
+	        }
+	    }
+	    if(students[edit].name[0] == 32 || strlen(students[edit].name) < 1){
+	        printf("\tError: Ten nay khong hop le.\n");
+	        goto Name;    
+	    }
+	    Mail:
+	    printf("\tNhap email hoc sinh moi: ");
+	    strcpy(temp, students[edit].email);
+	    fgets(students[edit].email, sizeof(students[edit].email), stdin);
+	    students[edit].email[strcspn(students[edit].email,"\n")] = '\0';
+	    int same = 0;
+	    for(i = 0; i < number; i++){
+	        if(strcmp(students[edit].email, students[i].email) == 0 && edit != i){
+	            same = 1;
+	        }
+	    }
+	    if(same == 1){
+	        printf("\tError: Email da ton tai.\n");
+	        strcpy(students[edit].email, temp);
+	        goto Mail;
+	    }
+	    for(i = 0; i < strlen(students[edit].email); i++){        
+	        if(students[edit].email[i] == 32){
+	            strcpy(students[edit].email, temp);
+	            goto Mail;        
+	        }
+	    }
+	    int len = strlen(students[edit].email);
+	    int emailLen = strlen(afterGmail);
+	    if (len <= emailLen){
+	        strcpy(students[edit].email, temp);
+	        goto Mail;
+	    }
+	    if (strcmp(students[edit].email + len - emailLen, afterGmail) != 0){
+	        strcpy(students[edit].email, temp);
+	        goto Mail;
+	    }
+	    Phone:
+	    printf("\tNhap phone hoc sinh moi: ");
+	    strcpy(temp, students[edit].phone);
+	    fgets(students[edit].phone, sizeof(students[edit].phone), stdin);
+	    students[edit].phone[strcspn(students[edit].phone,"\n")] = '\0';
+	    for(i = 0; i < strlen(students[edit].phone); i++){        
+	        if(students[edit].phone[i] == 32) {
+	            strcpy(students[edit].phone, temp);
+	            goto Phone;        
+	        }
+	    }
+	    if (strlen(students[edit].phone) != 10) {
+	        strcpy(students[edit].phone, temp);
+	        goto Phone;
+	    }
+	    for (i = 0; i < strlen(students[edit].phone); i++){
+	        if (students[edit].phone[i] < '0' || students[edit].phone[i] > '9'){
+	            strcpy(students[edit].phone, temp);
+	            goto Phone;
+	        }
+	    }
+	    end:
+	    printf("\tCap nhat thanh cong !!!\n\n");
+	}else{
+	    printf("\tError: ID da ton tai.\n\n");
+	    goto Student;
+	}
 }
 
 void editTeacher() {
-    system("cls");
-    printf("\n          --- Update Teacher Information ---\n");
-    int id;
-    int i;
-    printf("Please enter the ID of the teacher you want to edit: ");
-    scanf("%d", &id);
-    getchar();
-    for (i = 0; i < numbers; i++) {
-        if (teachers[i].id == id) {
-            printf("Editing teacher: %s\n", teachers[i].name);
-            Teacher updated_teacher = teachers[i];
-            printf("Enter new name (leave blank to keep the same): ");
-            fgets(updated_teacher.name, 50, stdin);
-            updated_teacher.name[strcspn(updated_teacher.name, "\n")] = 0;
-            printf("Enter new email: ");
-            fgets(updated_teacher.email, 50, stdin);
-            updated_teacher.email[strcspn(updated_teacher.email, "\n")] = 0;
-            printf("Enter new phone number: ");
-            fgets(updated_teacher.phone, 50, stdin);
-            updated_teacher.phone[strcspn(updated_teacher.phone, "\n")] = 0;
-
-            if (validateInput(updated_teacher, 1)) {
-                teachers[i] = updated_teacher;
-                printf("Teacher information successfully updated!\n");
-            }
-            return;
-        }
-    }
-
-    printf("Error: Teacher ID not found.\n");
+	system("cls");
+	char afterGmail[] = "@gmail.com";
+	int i, edit; 
+	char choice[1];
+	Teacher:
+	printf("\t\t---Edit teacher---\n");
+	int Id;
+	printf("\tNhap ID giao vien muon sua: ");
+	scanf("%d", &Id);
+	int check = 0;
+	fflush(stdin);
+	printf("\tThong tin giao vien muon sua\n");
+	printf("\t----------------------\n");
+	for (i = 0; i < numbers; i++) {
+	    if (Id == teachers[i].id) {
+	        check = 1;
+	        edit = i;
+	        printf("\tID: %d\n", teachers[i].id);
+	        printf("\tName: %s\n", teachers[i].name);
+	        printf("\tEmail: %s\n", teachers[i].email);
+	        printf("\tPhone: %s\n", teachers[i].phone);
+	    }
+	}
+	if (check == 1) {
+	    printf("\t\t---Update The New Teacher---\n");
+	    char temp[100];
+	    Name:
+	    printf("\tNhap name giao vien moi: ");
+	    strcpy(temp, teachers[edit].name);
+	    fgets(teachers[edit].name, sizeof(teachers[edit].name), stdin);
+	    teachers[edit].name[strcspn(teachers[edit].name, "\n")] = '\0';
+	    for (i = 0; i < strlen(teachers[edit].name); i++) {
+	        if (teachers[edit].name[i] == 32 && teachers[edit].name[i + 1] == 32) {
+	            printf("\tError: Ten nay khong hop le.\n");
+	            goto Name;    
+	        }
+	        if ((teachers[edit].name[i] < 65 || teachers[edit].name[i] > 122) && teachers[edit].name[i] != 32) {
+	            printf("\tError: Ten nay khong hop le.\n");
+	            goto Name;
+	        }
+	    }
+	    if (teachers[edit].name[0] == 32 || strlen(teachers[edit].name) < 1) {
+	        printf("\tError: Ten nay khong hop le.\n");
+	        goto Name;    
+	    }
+	    Mail:
+	    printf("\tNhap email giao vien moi: ");
+	    strcpy(temp, teachers[edit].email);
+	    fgets(teachers[edit].email, sizeof(teachers[edit].email), stdin);
+	    teachers[edit].email[strcspn(teachers[edit].email, "\n")] = '\0';
+	    int same = 0;
+	    for (i = 0; i < numbers; i++) {
+	        if (strcmp(teachers[edit].email, teachers[i].email) == 0 && edit != i) {
+	            same = 1;
+	        }
+	    }
+	    if (same == 1) {
+	        printf("\tError: Email da ton tai.\n");
+	        strcpy(teachers[edit].email, temp);
+	        goto Mail;
+	    }
+	    for (i = 0; i < strlen(teachers[edit].email); i++) {        
+	        if (teachers[edit].email[i] == 32) {
+	            strcpy(teachers[edit].email, temp);
+	            goto Mail;        
+	        }
+	    }
+	    int len = strlen(teachers[edit].email);
+	    int emailLen = strlen(afterGmail);
+	    if (len <= emailLen) {
+	        strcpy(teachers[edit].email, temp);
+	        goto Mail;
+	    }
+	    if (strcmp(teachers[edit].email + len - emailLen, afterGmail) != 0) {
+	        strcpy(teachers[edit].email, temp);
+	        goto Mail;
+	    }
+	    Phone:
+	    printf("\tNhap phone giao vien moi : ");
+	    strcpy(temp, teachers[edit].phone);
+	    fgets(teachers[edit].phone, sizeof(teachers[edit].phone), stdin);
+	    teachers[edit].phone[strcspn(teachers[edit].phone, "\n")] = '\0';
+	    for (i = 0; i < strlen(teachers[edit].phone); i++) {        
+	        if (teachers[edit].phone[i] == 32) {
+	            strcpy(teachers[edit].phone, temp);
+	            goto Phone;        
+	        }
+	    }
+	    if (strlen(teachers[edit].phone) != 10) {
+	        strcpy(teachers[edit].phone, temp);
+	        goto Phone;
+	    }
+	    for (i = 0; i < strlen(teachers[edit].phone); i++) {
+	        if (teachers[edit].phone[i] < '0' || teachers[edit].phone[i] > '9') {
+	            strcpy(teachers[edit].phone, temp);
+	            goto Phone;
+	        }
+	    }
+	    end:
+	    printf("\tCap nhat thanh cong !!!\n\n");
+	} else {
+	    printf("\tError: ID da ton tai.\n\n");
+	    goto Teacher;
+	}
 }
-
 void deleteStudent() {
 	system("cls");
 	printf("\n          --- delete student information ---\n");
@@ -628,29 +774,6 @@ void sortStudentsByName() {
     }
     printf("hoc sinh duoc sap sep theo ten.\n");
     displayStudents();
-}
-
-int validateInput(Student new_student, int skip_id) {
-    if (strlen(new_student.name) == 0 || strlen(new_student.email) == 0 || strlen(new_student.phone) == 0) {
-        printf("Error: khong de trong.\n");
-        return 0;
-    }
-   int i;
-    for ( i = 0; i < number; i++) {
-        if (!skip_id && students[i].id == new_student.id) {
-            printf("Error: id bi trung lap.\n");
-            return 0;
-        }
-        if (strcmp(students[i].email, new_student.email) == 0) {
-            printf("Error: email bi trung lap.\n");
-            return 0;
-        }
-        if (strcmp(students[i].phone, new_student.phone) == 0) {
-            printf("Error: so dien thoai trung lap.\n");
-            return 0;
-        }
-    }
-    return 1;
 }
 
 void saveToFileStudent() {
