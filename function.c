@@ -162,19 +162,19 @@ void displayMenuStudent() {
     printf("***Student Management System Using C***\n");
 	printf("                  STUDENT MENU\n");
 	printf("       =======================================\n");
-	printf("       | [1] hien thi danh sach sinh vien.   |\n");
+	printf("       | [1] Hien thi danh sach sinh vien.   |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [2] them sinh vien vao danh sach.   |\n");
+	printf("       | [2] Tim sinh vien vao danh sach.   |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [3] sua  thong tin sinh vien tru id.|\n");
+	printf("       | [3] Sua  thong tin sinh vien tru id.|\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [4] xoa sinh vien.                  |\n");
+	printf("       | [4] Xoa sinh vien.                  |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [5] tim kiem sinh vien.             |\n");
+	printf("       | [5] Tim kiem sinh vien.             |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [6] sap sep sinh vien theo ten.     |\n");
+	printf("       | [6] Sap sep sinh vien theo ten.     |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [7] luu lai danh sach hoc sinh.     |\n");
+	printf("       | [7] Luu lai danh sach hoc sinh.     |\n");
 	printf("       |-------------------------------------|\n");
 	printf("       | [8] Exit.                           |\n");
 	printf("       =======================================\n");
@@ -186,17 +186,17 @@ void displayMenuTeacher() {
     printf("***Student Management System Using C***\n");
 	printf("                  TEACHER MENU\n");
 	printf("       =======================================\n");
-	printf("       | [1] hien thi danh sach giao vien.   |\n");
+	printf("       | [1] Hien thi danh sach giao vien.   |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [2] them giao vien vao danh sach.   |\n");
+	printf("       | [2] Them giao vien vao danh sach.   |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [3] sua  thong tin giao vien tru id.|\n");
+	printf("       | [3] Sua  thong tin giao vien tru id.|\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [4] xoa giao vien khoi danh sach.   |\n");
+	printf("       | [4] Xoa giao vien khoi danh sach.   |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [5] tim kiem giao vien.             |\n");
+	printf("       | [5] Tim kiem giao vien.             |\n");
 	printf("       |-------------------------------------|\n");
-	printf("       | [6] luu lai danh sach giao vien.     |\n");
+	printf("       | [6] Luu lai danh sach giao vien.     |\n");
 	printf("       |-------------------------------------|\n");
 	printf("       | [7] Exit.                           |\n");
 	printf("       =======================================\n");
@@ -205,8 +205,8 @@ void displayMenuTeacher() {
 
 void displayStudents() {
 	system("cls");
-	int i; 
-	printf("\n          --- Display All Students ---\n");
+	int i;
+	printf("\n                          --- Display All Students ---\n");
 	printf("\nStudent list:\n");
 	printf("=================================================================================");
     printf("\n| %-3s | %-20s | %-30s | %-15s |\n", "ID", "Name", "Email", "Phone");
@@ -221,7 +221,7 @@ void displayStudents() {
 void displayTeachers() {
 	system("cls");
 	int i; 
-	printf("\n          --- Display All Teacher ---\n");
+	printf("\n                           --- Display All Teacher ---\n");
 	printf("\nTeacher list:\n");
 	printf("=================================================================================");
     printf("\n| %-3s | %-20s | %-30s | %-15s |\n", "ID", "Name", "Email", "Phone");
@@ -239,7 +239,7 @@ void addStudent() {
     char choice[1];
 	int i;
 	char afterGmail[] = "@gmail.com";
-	printf("\t\t**Add a new student**\n");
+	printf("\t\t---Add a new student---\n");
 	addStudent:
 	printf("\tEnter the ID: ");
 	int check = 0;
@@ -338,7 +338,7 @@ void addTeacher() {
     char choice[1];
     int i;
     char afterGmail[] = "@gmail.com";
-    printf("\t\t**Add a new teacher**\n");
+    printf("\t\t---Add a new teacher---\n");
 	addTeacher:
     printf("\tnhap ID: ");
     int check = 0;
